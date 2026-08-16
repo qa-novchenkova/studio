@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Дизайн-система «Студия» — редакционный портфолио-грид.
+   Серифный дисплей + моно-лейблы + фиолетовый акцент.
+   ============================================================ */
+@theme {
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: Georgia, "Times New Roman", "PT Serif", serif;
+  --font-mono: "SF Mono", "Cascadia Code", "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+  --color-bg: #F3F2F7;
+  --color-surface: #FFFFFF;
+  --color-ink: #16151C;
+  --color-ink-soft: #55535F;
+  --color-ink-mute: #8A8794;
+  --color-line: #E4E2EC;
+  --color-line-strong: #CFccdA;
+  --color-accent: #6C4CF1;
+  --color-accent-soft: #EDE9FE;
+  --color-accent-2: #FF5A3C;
+
+  --radius-xl2: 22px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0E0D13;
+    --color-surface: #17161F;
+    --color-ink: #F1F0F5;
+    --color-ink-soft: #AAA7B8;
+    --color-ink-mute: #6E6B7C;
+    --color-line: #262430;
+    --color-line-strong: #34313F;
+    --color-accent: #8B72FF;
+    --color-accent-soft: #221C3A;
+    --color-accent-2: #FF6A4D;
+  }
+}
+:root[data-theme="light"] {
+  --color-bg: #F3F2F7;
+  --color-surface: #FFFFFF;
+  --color-ink: #16151C;
+  --color-ink-soft: #55535F;
+  --color-ink-mute: #8A8794;
+  --color-line: #E4E2EC;
+  --color-line-strong: #CFccdA;
+  --color-accent: #6C4CF1;
+  --color-accent-soft: #EDE9FE;
+  --color-accent-2: #FF5A3C;
+}
+:root[data-theme="dark"] {
+  --color-bg: #0E0D13;
+  --color-surface: #17161F;
+  --color-ink: #F1F0F5;
+  --color-ink-soft: #AAA7B8;
+  --color-ink-mute: #6E6B7C;
+  --color-line: #262430;
+  --color-line-strong: #34313F;
+  --color-accent: #8B72FF;
+  --color-accent-soft: #221C3A;
+  --color-accent-2: #FF6A4D;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: 2.5px solid var(--color-accent); outline-offset: 3px; border-radius: 6px; }
+[id] { scroll-margin-top: 84px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
+}
