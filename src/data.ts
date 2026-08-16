@@ -18,13 +18,31 @@ export const agroDeck = {
   gallery: ['agro-s03', 'agro-s04', 'agro-s05', 'agro-s08'],
 }
 
-// Ниши в работе — без «пустых» карточек, просто честный список
-export const upcoming = [
-  'Автомобили и автосервис',
-  'Техника и электроника',
-  'Корма для животных',
-  'HoReCa',
-  'Недвижимость',
+// Направления студии — для бегущей строки под первым экраном
+export type Direction = { icon: 'doc' | 'download' | 'motion' | 'target' | 'play' | 'layout' | 'image' | 'chart' | 'pen'; label: string; note: string }
+
+export const directions: Direction[] = [
+  { icon: 'doc', label: 'Презентации', note: 'PPTX и HTML' },
+  { icon: 'download', label: 'Лид-магниты', note: 'чек-листы, гайды' },
+  { icon: 'motion', label: 'SVG-анимации', note: 'живая графика' },
+  { icon: 'target', label: 'Квизы и тесты', note: 'вовлечение' },
+  { icon: 'play', label: 'Мини-игры', note: 'браузерные' },
+  { icon: 'layout', label: 'Лендинги', note: 'страницы под оффер' },
+  { icon: 'image', label: 'Баннеры', note: 'соцсети и веб' },
+  { icon: 'chart', label: 'Инфографика', note: 'цифры наглядно' },
+  { icon: 'pen', label: 'Тексты', note: 'копирайт под нишу' },
+]
+
+// Кейсы для карусели
+export type CaseItem = { id: string; topic: string; title: string; desc: string; ready: boolean }
+
+export const cases: CaseItem[] = [
+  { id: 'agro', topic: 'Сельское хозяйство', title: 'Поле недобирает', desc: 'Питч-дек для агронома: где теряются центнеры и как их вернуть.', ready: true },
+  { id: 'auto', topic: 'Автосервис', title: 'Запись без хаоса', desc: 'Как сервису собирать заявки со всех каналов и не терять клиентов.', ready: false },
+  { id: 'tech', topic: 'Электроника', title: 'Карточка, которая продаёт', desc: 'Контент для магазина техники: описания, сравнения, подборки.', ready: false },
+  { id: 'petfood', topic: 'Корма для животных', title: 'Здоровье в миске', desc: 'Экспертный контент о питании питомцев и повторные продажи.', ready: false },
+  { id: 'horeca', topic: 'HoReCa', title: 'Полный зал в будни', desc: 'Меню, поводы и события, которые заполняют тихие дни.', ready: false },
+  { id: 'realty', topic: 'Недвижимость', title: 'Ключи быстрее', desc: 'Упаковка объекта: лендинг, презентация, показ.', ready: false },
 ]
 
 export type Magnet = { id: string; topic: string; title: string; format: string; desc: string; ready: boolean }

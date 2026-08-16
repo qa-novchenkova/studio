@@ -89,6 +89,15 @@ body {
 .sc-mote  { animation: drift 9s linear infinite; }
 .sc-rows  { animation: rowmove 6s ease-in-out infinite alternate; }
 
+/* ---- бегущая строка направлений ---- */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 38s linear infinite; width: max-content; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* горизонтальные карусели без полосы прокрутки */
+.no-sb { scrollbar-width: none; -ms-overflow-style: none; }
+.no-sb::-webkit-scrollbar { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
 }
