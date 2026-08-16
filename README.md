@@ -1,32 +1,44 @@
-# React + TypeScript + Vite
+# Студия — витрина маркетинг-контента
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Портфолио-сайт, показывающий создание маркетингового контента под разные ниши:
+презентации, лид-магниты, баннеры и интерактив. Второй проект в дополнение к
+кампании «Пульс» — акцент на **широте форматов и тем**.
 
-Currently, two official plugins are available:
+**Живой сайт:** https://qa-novchenkova.github.io/studio/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> Демо-проект портфолио. Контент сгенерирован через ИИ-инструменты с ручной доработкой.
 
-## React Compiler
+## Что внутри
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Презентации (6 ниш)** — питч-деки на сельское хозяйство, автомобили, технику,
+  корма для животных, HoReCa и недвижимость. У каждой живое превью (первый слайд),
+  скачивание в PPTX. Единый уровень оформления, разные палитры.
+- **Лид-магниты** — чек-листы и гайды под каждую нишу (PDF).
+- **Баннеры** — рекламная графика в разных форматах (пост, веб-баннер, сторис).
+- **Интерактив** — ссылки на живые форматы из кампании «Пульс» (тест, игра).
 
-## Expanding the Oxlint configuration
+## Технологии
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+React 19 · TypeScript · Vite · Tailwind CSS 4 · GitHub Pages (автодеплой).
+Отдельная «редакционная» айдентика: серифный дисплей (Georgia) + моно-лейблы +
+фиолетовый акцент. Тёмная и светлая темы.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## Как устроены ассеты
+
+- **Презентации** — генерируются шаблонным скриптом на `pptxgenjs` (одна структура,
+  контент и палитра на каждую нишу), лежат в `public/decks/`.
+- **Превью** — первый слайд каждой презентации отрендерен в PNG (`public/previews/`).
+- **Лид-магниты / баннеры** — добавляются по мере готовности (`public/leadmagnets/`, `public/banners/`).
+
+Список карточек и статус «готово / готовится» — в `src/data.ts`.
+
+## Запуск и деплой
+
+```bash
+npm install
+npm run dev      # http://localhost:5174/studio/
+npm run build    # сборка в dist/
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Деплой — автоматический: `git push` в `main` запускает GitHub Actions →
+публикация на GitHub Pages.
