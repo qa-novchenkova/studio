@@ -220,7 +220,7 @@ export default function App() {
           index="01"
           kicker="Кейсы"
           title="Материалы под конкретные отрасли"
-          sub="Каждый кейс — своя тема, своя графика и свой язык аудитории. Первый готов, остальные в работе."
+          sub="Каждый кейс — своя тема, своя графика и свой язык аудитории."
           aside={
             <div className="hidden shrink-0 gap-2 md:flex">
               <button onClick={() => slide(-1)} aria-label="Назад" className="grid h-11 w-11 place-items-center rounded-xl border border-line-strong text-ink-soft transition-colors hover:border-accent hover:text-accent">‹</button>
