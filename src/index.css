@@ -1,74 +1,66 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Дизайн-система «Студия» — редакционный портфолио-грид.
-   Серифный дисплей + моно-лейблы + фиолетовый акцент.
+   Дизайн-система «Студия» — зелёная, редакционная.
+   Сериф в заголовках, живой зелёный акцент, тёплое золото.
    ============================================================ */
 @theme {
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: Georgia, "Times New Roman", "PT Serif", serif;
   --font-mono: "SF Mono", "Cascadia Code", "JetBrains Mono", ui-monospace, Consolas, monospace;
 
-  --color-bg: #F3F2F7;
+  --color-bg: #F2F5EF;
   --color-surface: #FFFFFF;
-  --color-ink: #16151C;
-  --color-ink-soft: #55535F;
-  --color-ink-mute: #8A8794;
-  --color-line: #E4E2EC;
-  --color-line-strong: #CFccdA;
-  --color-accent: #6C4CF1;
-  --color-accent-soft: #EDE9FE;
-  --color-accent-2: #FF5A3C;
-
-  --radius-xl2: 22px;
+  --color-ink: #0F1D14;
+  --color-ink-soft: #4E5E52;
+  --color-ink-mute: #86958A;
+  --color-line: #DDE6D8;
+  --color-line-strong: #C4D2BE;
+  --color-accent: #2E7D4F;
+  --color-accent-hov: #24663F;
+  --color-accent-soft: #E2F0DC;
+  --color-gold: #D89A1E;
+  --color-panel: #0E2A1B;
+  --color-panel-ink: #EAF3E4;
+  --color-panel-soft: #A9BCA8;
+  --color-panel-line: #23412F;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #0E0D13;
-    --color-surface: #17161F;
-    --color-ink: #F1F0F5;
-    --color-ink-soft: #AAA7B8;
-    --color-ink-mute: #6E6B7C;
-    --color-line: #262430;
-    --color-line-strong: #34313F;
-    --color-accent: #8B72FF;
-    --color-accent-soft: #221C3A;
-    --color-accent-2: #FF6A4D;
+    --color-bg: #0A130D;
+    --color-surface: #121D16;
+    --color-ink: #E8F1E6;
+    --color-ink-soft: #A7B8A9;
+    --color-ink-mute: #6E7F72;
+    --color-line: #1E2C22;
+    --color-line-strong: #2C3D31;
+    --color-accent: #5FB47B;
+    --color-accent-hov: #74C48E;
+    --color-accent-soft: #16281C;
+    --color-gold: #E7B245;
+    --color-panel: #0C2216;
+    --color-panel-ink: #EAF3E4;
+    --color-panel-soft: #9FB3A2;
+    --color-panel-line: #1E3728;
   }
 }
 :root[data-theme="light"] {
-  --color-bg: #F3F2F7;
-  --color-surface: #FFFFFF;
-  --color-ink: #16151C;
-  --color-ink-soft: #55535F;
-  --color-ink-mute: #8A8794;
-  --color-line: #E4E2EC;
-  --color-line-strong: #CFccdA;
-  --color-accent: #6C4CF1;
-  --color-accent-soft: #EDE9FE;
-  --color-accent-2: #FF5A3C;
+  --color-bg: #F2F5EF; --color-surface: #FFFFFF;
+  --color-ink: #0F1D14; --color-ink-soft: #4E5E52; --color-ink-mute: #86958A;
+  --color-line: #DDE6D8; --color-line-strong: #C4D2BE;
+  --color-accent: #2E7D4F; --color-accent-hov: #24663F; --color-accent-soft: #E2F0DC;
+  --color-gold: #D89A1E;
+  --color-panel: #0E2A1B; --color-panel-ink: #EAF3E4; --color-panel-soft: #A9BCA8; --color-panel-line: #23412F;
 }
 :root[data-theme="dark"] {
-  --color-bg: #0E0D13;
-  --color-surface: #17161F;
-  --color-ink: #F1F0F5;
-  --color-ink-soft: #AAA7B8;
-  --color-ink-mute: #6E6B7C;
-  --color-line: #262430;
-  --color-line-strong: #34313F;
-  --color-accent: #8B72FF;
-  --color-accent-soft: #221C3A;
-  --color-accent-2: #FF6A4D;
+  --color-bg: #0A130D; --color-surface: #121D16;
+  --color-ink: #E8F1E6; --color-ink-soft: #A7B8A9; --color-ink-mute: #6E7F72;
+  --color-line: #1E2C22; --color-line-strong: #2C3D31;
+  --color-accent: #5FB47B; --color-accent-hov: #74C48E; --color-accent-soft: #16281C;
+  --color-gold: #E7B245;
+  --color-panel: #0C2216; --color-panel-ink: #EAF3E4; --color-panel-soft: #9FB3A2; --color-panel-line: #1E3728;
 }
-
-/* градиенты обложек по нишам (без инлайн-стилей — надёжнее) */
-.g-agro    { background: linear-gradient(140deg, #3F9E4D, #C7A24B); }
-.g-auto    { background: linear-gradient(140deg, #2C6BE4, #E4472C); }
-.g-tech    { background: linear-gradient(140deg, #7A3FF2, #12B5C9); }
-.g-petfood { background: linear-gradient(140deg, #E86A17, #2FA36B); }
-.g-horeca  { background: linear-gradient(140deg, #D5283A, #E0A100); }
-.g-realty  { background: linear-gradient(140deg, #0E8C8C, #C7A24B); }
 
 html { scroll-behavior: smooth; }
 body {
@@ -82,6 +74,20 @@ body {
 }
 :focus-visible { outline: 2.5px solid var(--color-accent); outline-offset: 3px; border-radius: 6px; }
 [id] { scroll-margin-top: 84px; }
+
+/* ---- анимации агро-сцены ---- */
+@keyframes sway   { 0%,100% { transform: rotate(-2.2deg); } 50% { transform: rotate(2.2deg); } }
+@keyframes grow   { 0% { transform: scaleY(.35); opacity: .35; } 100% { transform: scaleY(1); opacity: 1; } }
+@keyframes drift  { 0% { transform: translate(0,0); opacity: 0; } 15% { opacity: .9; } 100% { transform: translate(38px,-150px); opacity: 0; } }
+@keyframes spin   { to { transform: rotate(360deg); } }
+@keyframes rowmove{ 0% { transform: translateY(0); } 100% { transform: translateY(9px); } }
+
+.sc-sway  { animation: sway 5.5s ease-in-out infinite; transform-origin: bottom center; }
+.sc-sway2 { animation: sway 7s ease-in-out infinite reverse; transform-origin: bottom center; }
+.sc-grow  { animation: grow 2.6s cubic-bezier(.22,.9,.3,1) both; transform-origin: bottom center; }
+.sc-rays  { animation: spin 60s linear infinite; transform-origin: 470px 118px; }
+.sc-mote  { animation: drift 9s linear infinite; }
+.sc-rows  { animation: rowmove 6s ease-in-out infinite alternate; }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
