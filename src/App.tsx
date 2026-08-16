@@ -2,14 +2,13 @@ import { useState } from 'react'
 import { useTheme } from './lib/useTheme'
 import { BASE, decks, magnets, banners } from './data'
 
+const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+
 function Nav() {
   const { theme, toggle } = useTheme()
   const [open, setOpen] = useState(false)
   const link = 'text-[0.92rem] font-medium text-ink-soft transition-colors hover:text-ink cursor-pointer'
-  const go = (id: string) => {
-    setOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-  }
+  const go = (id: string) => { setOpen(false); scrollTo(id) }
   return (
     <nav className="sticky top-0 z-40 border-b border-line bg-[color-mix(in_srgb,var(--color-bg)_82%,transparent)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-6">
@@ -47,16 +46,24 @@ function Nav() {
   )
 }
 
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return <span className="font-mono text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-accent">{children}</span>
+function Kicker({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-surface px-3.5 py-1.5 text-[0.82rem] font-medium text-ink-soft">
+      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+      {children}
+    </span>
+  )
 }
 
-function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
+function SectionHead({ index, kicker, title, sub }: { index: string; kicker: string; title: string; sub?: string }) {
   return (
-    <div className="max-w-[52ch]">
-      <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 className="mt-3 font-display text-[clamp(1.8rem,4vw,2.8rem)] font-bold leading-[1.05] tracking-[-0.02em] text-balance">{title}</h2>
-      {sub && <p className="mt-3 text-[1.05rem] text-ink-soft">{sub}</p>}
+    <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
+      <div className="max-w-[54ch]">
+        <Kicker>{kicker}</Kicker>
+        <h2 className="mt-4 font-display text-[clamp(1.8rem,4vw,2.9rem)] font-bold leading-[1.03] tracking-[-0.02em] text-balance">{title}</h2>
+        {sub && <p className="mt-3 text-[1.05rem] text-ink-soft">{sub}</p>}
+      </div>
+      <div className="hidden shrink-0 font-display text-[3.4rem] font-bold leading-none text-line-strong md:block">{index}</div>
     </div>
   )
 }
@@ -67,35 +74,63 @@ export default function App() {
       <Nav />
 
       {/* HERO */}
-      <header className="mx-auto max-w-[1200px] px-6 pb-8 pt-16 sm:pt-24">
-        <Eyebrow>Портфолио маркетинг-контента</Eyebrow>
-        <h1 className="mt-4 max-w-[16ch] font-display text-[clamp(2.6rem,7vw,5.2rem)] font-bold leading-[0.98] tracking-[-0.03em] text-balance">
-          Контент, который продаёт — под любую нишу
+      <header className="mx-auto max-w-[1200px] px-6 pb-10 pt-14 sm:pt-20">
+        <Kicker>Портфолио маркетинг-контента</Kicker>
+        <h1 className="mt-5 font-display text-[clamp(2.6rem,7.5vw,5.4rem)] font-bold leading-[0.95] tracking-[-0.03em]">
+          Контент, который продаёт.<br />
+          <span className="text-accent">Под любую нишу.</span>
         </h1>
-        <p className="mt-6 max-w-[54ch] text-[1.15rem] text-ink-soft">
-          Презентации, лид-магниты, баннеры и интерактив для разных сфер — от агробизнеса до недвижимости.
+        <p className="mt-6 max-w-[52ch] text-[1.15rem] text-ink-soft">
+          Презентации, лид-магниты, баннеры и интерактив — от агрофермы до новостройки.
           Собрано через ИИ-инструменты с ручной доработкой.
         </p>
-        <div className="mt-7 flex flex-wrap gap-2">
-          {['Презентации', 'Лид-магниты', 'Баннеры', 'Интерактив', 'Тексты'].map((t) => (
-            <span key={t} className="rounded-full border border-line-strong px-3.5 py-1.5 font-mono text-[0.78rem] text-ink-soft">{t}</span>
+
+        {/* инфографика: счётчики */}
+        <div className="mt-9 flex flex-wrap gap-x-10 gap-y-5">
+          {[
+            ['6', 'ниш и рынков'],
+            ['20+', 'форматов контента'],
+            ['PPTX · PDF · PNG', 'готовые файлы'],
+          ].map(([n, l]) => (
+            <div key={l}>
+              <div className="font-display text-[clamp(1.8rem,3vw,2.5rem)] font-bold leading-none text-accent">{n}</div>
+              <div className="mt-1.5 text-[0.9rem] text-ink-soft">{l}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* мозаика ниш — заполняет первый экран цветом */}
+        <div className="mt-12 grid grid-cols-2 gap-3.5 md:grid-cols-3">
+          {decks.map((d) => (
+            <button
+              key={d.id}
+              onClick={() => scrollTo('decks')}
+              className={`group relative flex aspect-[16/11] flex-col justify-between overflow-hidden rounded-[20px] p-5 text-left text-white transition-transform hover:-translate-y-1 g-${d.id}`}
+            >
+              <span className="font-mono text-[0.66rem] font-medium uppercase tracking-[0.12em] text-white/80">{d.topic}</span>
+              <span className="pointer-events-none absolute right-4 top-4 text-white/70 opacity-0 transition group-hover:opacity-100">↗</span>
+              <div>
+                <div className="font-display text-[clamp(1.15rem,2vw,1.5rem)] font-bold leading-[1.05]">{d.title}</div>
+                <div className="mt-1 text-[0.78rem] text-white/80">Презентация · PPTX</div>
+              </div>
+            </button>
           ))}
         </div>
       </header>
 
       {/* PRESENTATIONS */}
       <section id="decks" className="mx-auto max-w-[1200px] px-6 py-16">
-        <SectionHead eyebrow="Презентации · 6 ниш" title="Питч-деки на любой рынок" sub="Каждую можно скачать в PPTX. Единый уровень оформления, разные отрасли и палитры." />
+        <SectionHead index="01" kicker="Презентации · 6 ниш" title="Питч-деки на любой рынок" sub="Каждую можно скачать в PPTX. Единый уровень оформления, разные отрасли и палитры." />
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {decks.map((d) => (
             <article key={d.id} className="group flex flex-col overflow-hidden rounded-[22px] border border-line bg-surface transition-transform hover:-translate-y-1">
-              <div className="relative aspect-[16/10]" style={{ background: `linear-gradient(135deg, ${d.accent}, ${d.accent2})` }}>
+              <div className={`relative aspect-[16/10] g-${d.id}`}>
                 <img
                   src={`${BASE}previews/${d.id}.png`}
                   alt={`Превью: ${d.title}`}
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"
-                  onError={(e) => ((e.currentTarget.style.display = 'none'))}
+                  onError={(e) => (e.currentTarget.style.display = 'none')}
                 />
                 <span className="absolute left-3 top-3 rounded-full bg-black/45 px-3 py-1 font-mono text-[0.68rem] font-medium uppercase tracking-wider text-white backdrop-blur-sm">
                   {d.topic}
@@ -120,7 +155,7 @@ export default function App() {
 
       {/* LEAD MAGNETS */}
       <section id="magnets" className="mx-auto max-w-[1200px] px-6 py-16">
-        <SectionHead eyebrow="Лид-магниты" title="Бесплатная польза в обмен на контакт" sub="Чек-листы, гайды и шаблоны, которые превращают посетителя в заявку." />
+        <SectionHead index="02" kicker="Лид-магниты" title="Бесплатная польза в обмен на контакт" sub="Чек-листы, гайды и шаблоны, которые превращают посетителя в заявку." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {magnets.map((m) => (
             <article key={m.id} className="flex flex-col rounded-[18px] border border-line bg-surface p-6">
@@ -142,7 +177,7 @@ export default function App() {
 
       {/* BANNERS */}
       <section id="banners" className="mx-auto max-w-[1200px] px-6 py-16">
-        <SectionHead eyebrow="Баннеры" title="Рекламная графика в разных форматах" sub="Посты, веб-баннеры и сторис — под разные площадки и задачи." />
+        <SectionHead index="03" kicker="Баннеры" title="Рекламная графика в разных форматах" sub="Посты, веб-баннеры и сторис — под разные площадки и задачи." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {banners.map((b) => (
             <article key={b.id} className="overflow-hidden rounded-[18px] border border-line bg-surface">
@@ -161,7 +196,7 @@ export default function App() {
 
       {/* INTERACTIVE */}
       <section id="play" className="mx-auto max-w-[1200px] px-6 py-16">
-        <SectionHead eyebrow="Интерактив" title="Не только статичный контент" sub="Живые форматы вовлекают лучше баннеров. Примеры — из кампании «Пульс»." />
+        <SectionHead index="04" kicker="Интерактив" title="Не только статичный контент" sub="Живые форматы вовлекают лучше баннеров. Примеры — из кампании «Пульс»." />
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {[
             ['Виральный тест', '«Кто ты в хаосе рабочего дня» — 4 архетипа и шаринг.', 'https://qa-novchenkova.github.io/puls/#/quiz'],

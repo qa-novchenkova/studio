@@ -62,6 +62,14 @@
   --color-accent-2: #FF6A4D;
 }
 
+/* градиенты обложек по нишам (без инлайн-стилей — надёжнее) */
+.g-agro    { background: linear-gradient(140deg, #3F9E4D, #C7A24B); }
+.g-auto    { background: linear-gradient(140deg, #2C6BE4, #E4472C); }
+.g-tech    { background: linear-gradient(140deg, #7A3FF2, #12B5C9); }
+.g-petfood { background: linear-gradient(140deg, #E86A17, #2FA36B); }
+.g-horeca  { background: linear-gradient(140deg, #D5283A, #E0A100); }
+.g-realty  { background: linear-gradient(140deg, #0E8C8C, #C7A24B); }
+
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
