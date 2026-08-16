@@ -91,13 +91,13 @@ function Kicker({ children }: { children: React.ReactNode }) {
   )
 }
 
-function SectionHead({ index, kicker, title, sub, aside }: { index: string; kicker: string; title: string; sub?: string; aside?: React.ReactNode }) {
+function SectionHead({ index, kicker, title, sub, aside, wideSub }: { index: string; kicker: string; title: string; sub?: string; aside?: React.ReactNode; wideSub?: boolean }) {
   return (
     <div className="flex items-end justify-between gap-6 border-b border-line pb-6">
-      <div className="max-w-[54ch]">
+      <div className={wideSub ? '' : 'max-w-[54ch]'}>
         <Kicker>{kicker}</Kicker>
-        <h2 className="mt-4 font-display text-[clamp(1.8rem,4vw,2.9rem)] font-bold leading-[1.03] tracking-[-0.02em] text-balance">{title}</h2>
-        {sub && <p className="mt-3 text-[1.05rem] text-ink-soft">{sub}</p>}
+        <h2 className={`mt-4 font-display text-[clamp(1.8rem,4vw,2.9rem)] font-bold leading-[1.03] tracking-[-0.02em] text-balance ${wideSub ? 'max-w-[54ch]' : ''}`}>{title}</h2>
+        {sub && <p className={`mt-3 text-[1.05rem] text-ink-soft ${wideSub ? 'lg:whitespace-nowrap' : ''}`}>{sub}</p>}
       </div>
       {aside ?? <div className="hidden shrink-0 font-display text-[3.4rem] font-bold leading-none text-line-strong md:block">{index}</div>}
     </div>
@@ -204,13 +204,8 @@ export default function App() {
                 <IconMail size={18} /> Обсудить проект
               </button>
             </div>
-            <div className="mt-9 flex flex-wrap gap-x-9 gap-y-4">
-              {[['9', 'направлений работы'], ['10', 'слайдов в первом кейсе'], ['PPTX · PDF · веб', 'форматы на выходе']].map(([n, l]) => (
-                <div key={l}>
-                  <div className="font-display text-[1.9rem] font-bold leading-none text-accent">{n}</div>
-                  <div className="mt-1 text-[0.88rem] text-ink-soft">{l}</div>
-                </div>
-              ))}
+            <div className="mt-9 font-display text-[1.9rem] font-bold leading-none text-accent">
+              PPTX · PDF · веб
             </div>
           </div>
           <AgroScene />
@@ -333,7 +328,7 @@ export default function App() {
 
       {/* INTERACTIVE */}
       <section id="play" className="mx-auto max-w-[1200px] px-6 py-16">
-        <SectionHead index="03" kicker="Интерактив" title="Форматы, в которые играют" sub="Тесты, игры и калькуляторы вовлекают сильнее баннера — и приводят заявки." />
+        <SectionHead index="03" kicker="Интерактив" title="Форматы, в которые играют" sub="Тесты, игры и калькуляторы вовлекают сильнее баннера и приводят к заявкам." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {interactives.map((it) => {
             const inner = (
@@ -362,7 +357,8 @@ export default function App() {
 
       {/* ABOUT */}
       <section id="about" className="mx-auto max-w-[1200px] px-6 py-16">
-        <SectionHead index="04" kicker="Подход" title="Как рождается материал" sub="Рабочий цикл: идея → промпт → генерация → доработка руками → готовый файл." />
+        <SectionHead index="04" kicker="Подход" title="Как рождается материал" wideSub
+          sub="Рабочий цикл: идея → промпт → генерация → доработка руками → готовый файл." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {[
             ['Погружение', 'Изучаю отрасль и боль аудитории: чем живёт агроном, что решает в поле.', <IconTarget key="i" />],
