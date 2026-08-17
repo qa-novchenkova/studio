@@ -48,7 +48,7 @@ export const cases: CaseItem[] = [
 export type Magnet = { id: string; topic: string; title: string; format: string; desc: string; ready: boolean }
 
 export const magnets: Magnet[] = [
-  { id: 'agro-checklist', topic: 'Агро', title: 'Чек-лист осмотра поля перед обработкой', format: 'PDF · чек-лист', desc: '11 пунктов, которые агроном проверяет до выезда техники.', ready: false },
+  { id: 'agro-checklist', topic: 'Агро', title: 'Осмотр поля перед обработкой', format: 'PDF · чек-лист', desc: '11 пунктов, которые агроном проверяет до выезда техники. Готов к печати на A4.', ready: true },
   { id: 'agro-calendar', topic: 'Агро', title: 'Календарь фаз и обработок на сезон', format: 'PDF · шаблон', desc: 'Готовая сетка: фаза — задача — препарат — срок.', ready: false },
   { id: 'agro-econ', topic: 'Агро', title: 'Как посчитать цену недобора урожая', format: 'PDF · гайд', desc: 'Простая формула: центнеры → рубли → решение.', ready: false },
 ]

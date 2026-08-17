@@ -312,7 +312,13 @@ export default function App() {
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {magnets.map((m) => (
             <article key={m.id} className="flex flex-col rounded-[18px] border border-line bg-surface p-6">
-              <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-accent-soft text-accent"><IconDoc /></div>
+              {m.ready ? (
+                <button onClick={() => setLightbox(`magnet-${m.id}`)} className="mb-4 overflow-hidden rounded-xl border border-line bg-bg transition-transform hover:-translate-y-0.5 hover:border-accent">
+                  <img src={`${BASE}previews/magnet-${m.id}.png`} alt={`Превью: ${m.title}`} loading="lazy" className="block aspect-[3/4] w-full object-cover object-top" />
+                </button>
+              ) : (
+                <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-accent-soft text-accent"><IconDoc /></div>
+              )}
               <div className="text-[0.72rem] font-medium uppercase tracking-[0.1em] text-ink-mute">{m.format}</div>
               <h3 className="mt-1.5 font-display text-[1.2rem] font-bold leading-tight">{m.title}</h3>
               <p className="mt-1.5 flex-1 text-[0.92rem] text-ink-soft">{m.desc}</p>
