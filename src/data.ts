@@ -103,6 +103,7 @@ export const caseDetails: CaseDetail[] = [
     ],
     gallery: ['realty-s03', 'realty-s04', 'realty-s05', 'realty-s06'],
     magnet: { file: 'realty-checklist', title: 'Чек-лист упаковки объекта' },
+    quiz: { to: '/game-realty', title: 'Мини-игра «Подбери объект»' },
   },
 ]
 
@@ -151,6 +152,7 @@ export const interactives: Interactive[] = [
   { title: 'Виральный тест', desc: '«Кто ты в хаосе рабочего дня» — 4 архетипа и шаринг в соцсети.', href: 'https://qa-novchenkova.github.io/puls/#/quiz', tag: 'Тест', ready: true },
   { title: 'Мини-игра', desc: '«Успей обработать лиды» — аркада на реакцию с рекордом.', href: 'https://qa-novchenkova.github.io/puls/#/game', tag: 'Игра', ready: true },
   { title: 'Собери правильную миску', desc: 'Мини-игра для зоо-бренда: ловим полезные ингредиенты, пропускаем пустые калории.', to: '/game-petfood', tag: 'Игра', ready: true },
+  { title: 'Подбери объект под запрос', desc: 'Мини-игра для риелтора: клиент называет требование — за 9 секунд выбираем подходящий объект.', to: '/game-realty', tag: 'Игра', ready: true },
   { title: 'Успей принять машину', desc: 'Мини-игра для автосервиса: ставим приёмку на полосу и не упускаем клиентов.', to: '/game-auto', tag: 'Игра', ready: true },
   { title: 'Сколько приносит работа с меню', desc: 'Калькулятор для ресторатора: подставьте свои цифры и увидите прибавку за месяц и за год.', to: '/calc-horeca', tag: 'Калькулятор', ready: true },
 ]
