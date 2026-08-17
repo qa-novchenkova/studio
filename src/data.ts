@@ -85,6 +85,7 @@ export const caseDetails: CaseDetail[] = [
     ],
     gallery: ['auto-s03', 'auto-s04', 'auto-s05', 'auto-s07'],
     magnet: { file: 'auto-audit', title: 'Чек-лист аудита записи' },
+    quiz: { to: '/game-auto', title: 'Мини-игра «Успей принять машину»' },
   },
 ]
 
@@ -132,6 +133,7 @@ export const interactives: Interactive[] = [
   { title: 'Виральный тест', desc: '«Кто ты в хаосе рабочего дня» — 4 архетипа и шаринг в соцсети.', href: 'https://qa-novchenkova.github.io/puls/#/quiz', tag: 'Тест', ready: true },
   { title: 'Мини-игра', desc: '«Успей обработать лиды» — аркада на реакцию с рекордом.', href: 'https://qa-novchenkova.github.io/puls/#/game', tag: 'Игра', ready: true },
   { title: 'Собери правильную миску', desc: 'Мини-игра для зоо-бренда: ловим полезные ингредиенты, пропускаем пустые калории.', to: '/game-petfood', tag: 'Игра', ready: true },
+  { title: 'Успей принять машину', desc: 'Мини-игра для автосервиса: ставим приёмку на полосу и не упускаем клиентов.', to: '/game-auto', tag: 'Игра', ready: true },
   { title: 'Сколько приносит работа с меню', desc: 'Калькулятор для ресторатора: подставьте свои цифры и увидите прибавку за месяц и за год.', to: '/calc-horeca', tag: 'Калькулятор', ready: true },
 ]
 

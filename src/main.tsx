@@ -6,6 +6,7 @@ import App from './App.tsx'
 import AgroQuiz from './pages/AgroQuiz.tsx'
 import MenuCalc from './pages/MenuCalc.tsx'
 import PetGame from './pages/PetGame.tsx'
+import AutoGame from './pages/AutoGame.tsx'
 
 // при смене страницы — наверх
 function ScrollTop() {
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/quiz-agro" element={<AgroQuiz />} />
         <Route path="/calc-horeca" element={<MenuCalc />} />
         <Route path="/game-petfood" element={<PetGame />} />
+        <Route path="/game-auto" element={<AutoGame />} />
       </Routes>
     </HashRouter>
   </StrictMode>,

@@ -70,10 +70,11 @@ export default function PetGame() {
   const [bowlX, setBowlX] = useState(50)
   const [best, setBest] = useState(() => Number(localStorage.getItem('studio-pet-best') || 0))
   const field = useRef<HTMLDivElement>(null)
-  const g = useRef({ items: [] as Item[], score: 0, lives: 3, seq: 0, t0: 0, spawn: 0, bowl: 50 })
+  const g = useRef({ items: [] as Item[], score: 0, lives: 3, seq: 0, t0: 0, last: 0, spawn: 0, bowl: 50 })
 
   const start = () => {
-    g.current = { items: [], score: 0, lives: 3, seq: 0, t0: performance.now(), spawn: 0, bowl: 50 }
+    const now = performance.now()
+    g.current = { items: [], score: 0, lives: 3, seq: 0, t0: now, last: now, spawn: 0, bowl: 50 }
     setSnap({ items: [], score: 0, lives: 3, left: DURATION })
     setStatus('play')
   }
@@ -112,7 +113,9 @@ export default function PetGame() {
       const s = g.current
       const now = performance.now()
       const elapsed = (now - s.t0) / 1000
-      s.spawn += 33
+      const dt = Math.min(200, now - s.last)   // реальное время: устойчиво к троттлингу вкладки
+      s.last = now
+      s.spawn += dt
 
       const every = Math.max(420, 900 - elapsed * 8)
       if (s.spawn >= every) {
@@ -130,7 +133,7 @@ export default function PetGame() {
 
       const alive: Item[] = []
       for (const it of s.items) {
-        const y = it.y + it.v
+        const y = it.y + it.v * (dt / 33)
         const caught = y >= 82 && y <= 95 && Math.abs(it.x - s.bowl) < 9
         if (caught) {
           if (GOOD.includes(it.kind)) s.score += 10
