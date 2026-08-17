@@ -1,4 +1,5 @@
 import { useRef, useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { useTheme } from './lib/useTheme'
 import { BASE, agroDeck, directions, cases, magnets, interactives } from './data'
 import AgroScene from './components/AgroScene'
@@ -348,7 +349,13 @@ export default function App() {
                 <p className="mt-1.5 text-[0.95rem] text-ink-soft">{it.desc}</p>
               </>
             )
-            return it.ready && it.href ? (
+            return it.ready && it.to ? (
+              <Link key={it.title} to={it.to}
+                className="group rounded-[18px] border border-line bg-surface p-6 transition-colors hover:border-accent">
+                {inner}
+                <span className="mt-4 inline-flex items-center gap-1.5 text-[0.92rem] font-semibold text-accent">Пройти тест <span className="transition-transform group-hover:translate-x-1">→</span></span>
+              </Link>
+            ) : it.ready && it.href ? (
               <a key={it.title} href={it.href} target="_blank" rel="noopener noreferrer"
                 className="group rounded-[18px] border border-line bg-surface p-6 transition-colors hover:border-accent">
                 {inner}

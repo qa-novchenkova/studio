@@ -53,11 +53,11 @@ export const magnets: Magnet[] = [
   { id: 'agro-econ', topic: 'Агро', title: 'Как посчитать цену недобора урожая', format: 'PDF · гайд', desc: 'Простая формула: центнеры → рубли → решение.', ready: false },
 ]
 
-export type Interactive = { title: string; desc: string; href?: string; tag: string; ready: boolean }
+export type Interactive = { title: string; desc: string; href?: string; to?: string; tag: string; ready: boolean }
 
 export const interactives: Interactive[] = [
+  { title: 'Где поле теряет урожай', desc: 'Тест для агронома: 6 вопросов — и понятно, какой фактор забирает центнеры.', to: '/quiz-agro', tag: 'Тест', ready: true },
   { title: 'Виральный тест', desc: '«Кто ты в хаосе рабочего дня» — 4 архетипа и шаринг в соцсети.', href: 'https://qa-novchenkova.github.io/puls/#/quiz', tag: 'Тест', ready: true },
   { title: 'Мини-игра', desc: '«Успей обработать лиды» — аркада на реакцию с рекордом.', href: 'https://qa-novchenkova.github.io/puls/#/game', tag: 'Игра', ready: true },
-  { title: 'Тест для агронома', desc: '«Что ворует твой урожай» — определяем слабое звено на поле.', tag: 'Тест', ready: false },
   { title: 'Калькулятор недобора', desc: 'Считает потери в центнерах и рублях по вводным поля.', tag: 'Калькулятор', ready: false },
 ]

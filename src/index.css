@@ -94,6 +94,14 @@ input, textarea { cursor: text; }
 .sc-mote  { animation: drift 9s linear infinite; }
 .sc-rows  { animation: rowmove 6s ease-in-out infinite alternate; }
 
+/* ---- анимации иллюстраций теста ---- */
+@keyframes pulse-spot { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.14); opacity: .82; } }
+@keyframes crawl { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-10px,14px) rotate(-6deg); } }
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.sc-pulse { animation: pulse-spot 3.2s ease-in-out infinite; }
+.sc-crawl { animation: crawl 6s ease-in-out infinite; }
+.sc-float { animation: floaty 3.6s ease-in-out infinite; }
+
 /* ---- бегущая строка направлений ---- */
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee-track { animation: marquee 38s linear infinite; width: max-content; }
