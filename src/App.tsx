@@ -1,7 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from './lib/useTheme'
-import { BASE, caseDetails, directions, cases, magnets, interactives } from './data'
+import { BASE, caseDetails, directions, cases, magnets, interactives, banners } from './data'
 import AgroScene from './components/AgroScene'
 import {
   IconLeaf, IconWheat, IconChart, IconDoc, IconDownload, IconSpark, IconPlay,
@@ -17,6 +17,7 @@ const NAV = [
   ['cases', 'Кейсы'],
   ['magnets', 'Материалы'],
   ['play', 'Интерактив'],
+  ['banners', 'Баннеры'],
   ['about', 'Подход'],
   ['contact', 'Контакты'],
 ] as const
@@ -310,7 +311,7 @@ export default function App() {
               <div className="mb-3 text-[0.85rem] font-medium text-ink-mute">Слайды из презентации — нажмите, чтобы увеличить</div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {d.gallery.map((g) => (
-                  <button key={g} onClick={() => setLightbox(g)} className="overflow-hidden rounded-2xl border border-line bg-bg transition-transform hover:-translate-y-1 hover:border-accent">
+                  <button key={g} onClick={() => setLightbox(`${BASE}previews/${g}.png`)} className="overflow-hidden rounded-2xl border border-line bg-bg transition-transform hover:-translate-y-1 hover:border-accent">
                     <img src={`${BASE}previews/${g}.png`} alt="Слайд презентации" loading="lazy" className="block aspect-[16/9] w-full object-contain" />
                   </button>
                 ))}
@@ -328,7 +329,7 @@ export default function App() {
           {magnets.map((m) => (
             <article key={m.id} className="flex flex-col rounded-[18px] border border-line bg-surface p-6">
               {m.ready ? (
-                <button onClick={() => setLightbox(`magnet-${m.id}`)} className="mb-4 overflow-hidden rounded-xl border border-line bg-bg transition-transform hover:-translate-y-0.5 hover:border-accent">
+                <button onClick={() => setLightbox(`${BASE}previews/magnet-${m.id}.png`)} className="mb-4 overflow-hidden rounded-xl border border-line bg-bg transition-transform hover:-translate-y-0.5 hover:border-accent">
                   <img src={`${BASE}previews/magnet-${m.id}.png`} alt={`Превью: ${m.title}`} loading="lazy" className="block aspect-[3/4] w-full object-cover object-top" />
                 </button>
               ) : (
@@ -382,9 +383,34 @@ export default function App() {
         </div>
       </section>
 
+      {/* BANNERS */}
+      <section id="banners" className="mx-auto max-w-[1200px] px-6 py-16">
+        <SectionHead index="04" kicker="Баннеры" title="Графика под площадки"
+          sub="Посты, веб-баннеры и сторис — в размерах, готовых к публикации. Нажмите, чтобы увеличить." />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {banners.map((b) => (
+            <article key={b.id} className="flex flex-col overflow-hidden rounded-[18px] border border-line bg-surface">
+              <button onClick={() => setLightbox(`${BASE}banners/${b.id}.png`)} className="block overflow-hidden bg-bg transition-transform hover:-translate-y-0.5">
+                <img src={`${BASE}banners/${b.id}.png`} alt={`Баннер: ${b.title}`} loading="lazy"
+                  className="block w-full object-cover" style={{ aspectRatio: b.ratio }} />
+              </button>
+              <div className="flex flex-1 flex-col p-4">
+                <div className="text-[0.68rem] font-medium uppercase tracking-[0.1em] text-ink-mute">{b.size}</div>
+                <h3 className="mt-1 font-display text-[1.05rem] font-bold leading-tight">{b.title}</h3>
+                <p className="mt-0.5 flex-1 text-[0.85rem] text-ink-soft">{b.topic}</p>
+                <a href={`${BASE}banners/${b.id}.png`} download
+                  className="mt-3 inline-flex w-max items-center gap-1.5 rounded-xl border border-line-strong px-3.5 py-2 text-[0.85rem] font-semibold text-ink transition-colors hover:border-accent hover:text-accent">
+                  <IconDownload size={15} /> PNG
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       {/* ABOUT */}
       <section id="about" className="mx-auto max-w-[1200px] px-6 py-16">
-        <SectionHead index="04" kicker="Подход" title="Как рождается материал" wideSub
+        <SectionHead index="05" kicker="Подход" title="Как рождается материал" wideSub
           sub="Рабочий цикл: идея → промпт → генерация → доработка руками → готовый файл." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -449,7 +475,7 @@ export default function App() {
 
       {lightbox && (
         <div onClick={() => setLightbox(null)} className="fixed inset-0 z-[95] grid place-items-center bg-black/80 p-6 backdrop-blur-sm">
-          <img src={`${BASE}previews/${lightbox}.png`} alt="Слайд презентации" className="max-h-[86vh] w-auto max-w-full rounded-xl shadow-2xl" />
+          <img src={lightbox} alt="Просмотр материала" className="max-h-[86vh] w-auto max-w-full rounded-xl shadow-2xl" />
           <button onClick={() => setLightbox(null)} aria-label="Закрыть" className="absolute right-6 top-6 grid h-11 w-11 place-items-center rounded-xl border border-white/25 text-white hover:bg-white/10">✕</button>
         </div>
       )}

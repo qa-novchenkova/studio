@@ -4,6 +4,7 @@ import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import AgroQuiz from './pages/AgroQuiz.tsx'
+import MenuCalc from './pages/MenuCalc.tsx'
 
 // при смене страницы — наверх
 function ScrollTop() {
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/quiz-agro" element={<AgroQuiz />} />
+        <Route path="/calc-horeca" element={<MenuCalc />} />
       </Routes>
     </HashRouter>
   </StrictMode>,

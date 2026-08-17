@@ -93,5 +93,15 @@ export const interactives: Interactive[] = [
   { title: 'Где поле теряет урожай', desc: 'Тест для агронома: 6 вопросов — и понятно, какой фактор забирает центнеры.', to: '/quiz-agro', tag: 'Тест', ready: true },
   { title: 'Виральный тест', desc: '«Кто ты в хаосе рабочего дня» — 4 архетипа и шаринг в соцсети.', href: 'https://qa-novchenkova.github.io/puls/#/quiz', tag: 'Тест', ready: true },
   { title: 'Мини-игра', desc: '«Успей обработать лиды» — аркада на реакцию с рекордом.', href: 'https://qa-novchenkova.github.io/puls/#/game', tag: 'Игра', ready: true },
-  { title: 'Калькулятор недобора', desc: 'Считает потери в центнерах и рублях по вводным поля.', tag: 'Калькулятор', ready: false },
+  { title: 'Сколько приносит работа с меню', desc: 'Калькулятор для ресторатора: ползунки по гостям и чеку — и видно прибавку за месяц и год.', to: '/calc-horeca', tag: 'Калькулятор', ready: true },
+]
+
+// Баннеры (файлы в public/banners)
+export type Banner = { id: string; topic: string; title: string; size: string; ratio: string }
+
+export const banners: Banner[] = [
+  { id: 'agro-post-1080', topic: 'Агро', title: 'Чек-лист осмотра поля', size: '1080×1080 · пост', ratio: '1/1' },
+  { id: 'agro-web-1200x628', topic: 'Агро', title: 'Поле недобирает?', size: '1200×628 · веб-баннер', ratio: '1200/628' },
+  { id: 'horeca-post-1080', topic: 'Кафе и рестораны', title: 'Аудит меню за 20 минут', size: '1080×1080 · пост', ratio: '1/1' },
+  { id: 'horeca-story-1080x1920', topic: 'Кафе и рестораны', title: 'Будни пустые?', size: '1080×1920 · сторис', ratio: '9/16' },
 ]
