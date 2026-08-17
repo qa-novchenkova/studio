@@ -1,7 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from './lib/useTheme'
-import { BASE, agroDeck, directions, cases, magnets, interactives } from './data'
+import { BASE, caseDetails, directions, cases, magnets, interactives } from './data'
 import AgroScene from './components/AgroScene'
 import {
   IconLeaf, IconWheat, IconChart, IconDoc, IconDownload, IconSpark, IconPlay,
@@ -243,7 +243,7 @@ export default function App() {
               <h3 className="mt-1.5 font-display text-[1.28rem] font-bold leading-tight">{c.title}</h3>
               <p className="mt-1.5 flex-1 text-[0.92rem] text-ink-soft">{c.desc}</p>
               {c.ready ? (
-                <button onClick={() => go('case-agro')} className="mt-4 inline-flex w-max items-center gap-1.5 rounded-xl bg-accent px-4 py-2.5 text-[0.9rem] font-semibold text-white transition-colors hover:bg-accent-hov">
+                <button onClick={() => go(`case-${c.id}`)} className="mt-4 inline-flex w-max items-center gap-1.5 rounded-xl bg-accent px-4 py-2.5 text-[0.9rem] font-semibold text-white transition-colors hover:bg-accent-hov">
                   Смотреть кейс →
                 </button>
               ) : (
@@ -254,57 +254,71 @@ export default function App() {
         </div>
       </section>
 
-      {/* CASE DETAIL */}
-      <section id="case-agro" className="mx-auto max-w-[1200px] px-6 pb-16">
-        <div className="rounded-[26px] border border-line bg-surface p-6 sm:p-8">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-accent-soft px-3 py-1 text-[0.78rem] font-medium text-accent">{agroDeck.topic}</span>
-            <span className="rounded-full border border-line px-3 py-1 text-[0.78rem] text-ink-soft">{agroDeck.slides} слайдов</span>
-            <span className="rounded-full border border-line px-3 py-1 text-[0.78rem] text-ink-soft">{agroDeck.audience}</span>
-          </div>
-
-          <div className="mt-5 grid items-start gap-8 lg:grid-cols-2">
-            <div>
-              <h3 className="font-display text-[clamp(1.6rem,3vw,2.2rem)] font-bold leading-tight">{agroDeck.title}</h3>
-              <p className="mt-3 text-[1.02rem] text-ink-soft">{agroDeck.tagline}</p>
-              <ul className="mt-5 flex flex-col gap-3">
-                {agroDeck.bullets.map((b, i) => (
-                  <li key={b} className="flex gap-3 text-[0.95rem]">
-                    <span className="mt-0.5 shrink-0 text-accent">
-                      {[<IconChart key="a" size={18} />, <IconTarget key="b" size={18} />, <IconWheat key="c" size={18} />, <IconDrop key="d" size={18} />, <IconLeaf key="e" size={18} />][i]}
-                    </span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
-              <a href={`${BASE}decks/${agroDeck.id}.pptx`} download className="mt-6 inline-flex w-max items-center gap-2 rounded-xl bg-accent px-5 py-3 font-semibold text-white transition-colors hover:bg-accent-hov">
-                <IconDownload size={18} /> Скачать PPTX
-              </a>
+      {/* CASE DETAILS — по одному блоку на готовый кейс */}
+      {caseDetails.map((d) => (
+        <section key={d.id} id={`case-${d.id}`} className="mx-auto max-w-[1200px] px-6 pb-16">
+          <div className="rounded-[26px] border border-line bg-surface p-6 sm:p-8">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="rounded-full bg-accent-soft px-3 py-1 text-[0.78rem] font-medium text-accent">{d.topic}</span>
+              <span className="rounded-full border border-line px-3 py-1 text-[0.78rem] text-ink-soft">{d.slides} слайдов</span>
+              <span className="rounded-full border border-line px-3 py-1 text-[0.78rem] text-ink-soft">{d.audience}</span>
             </div>
 
-            {/* превью — фиксированные пропорции, без растяжения */}
-            <figure className="m-0">
-              <div className="overflow-hidden rounded-2xl border border-line bg-bg">
-                <img src={`${BASE}previews/agro.png`} alt="Титульный слайд презентации «Поле недобирает»"
-                  className="block aspect-[16/9] w-full object-contain" />
+            <div className="mt-5 grid items-start gap-8 lg:grid-cols-2">
+              <div>
+                <h3 className="font-display text-[clamp(1.6rem,3vw,2.2rem)] font-bold leading-tight">{d.title}</h3>
+                <p className="mt-3 text-[1.02rem] text-ink-soft">{d.tagline}</p>
+                <ul className="mt-5 flex flex-col gap-3">
+                  {d.bullets.map((b, i) => (
+                    <li key={b} className="flex gap-3 text-[0.95rem]">
+                      <span className="mt-0.5 shrink-0 text-accent">
+                        {[<IconChart key="a" size={18} />, <IconTarget key="b" size={18} />, <IconWheat key="c" size={18} />, <IconDrop key="d" size={18} />, <IconLeaf key="e" size={18} />][i]}
+                      </span>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a href={`${BASE}decks/${d.id}.pptx`} download className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 font-semibold text-white transition-colors hover:bg-accent-hov">
+                    <IconDownload size={18} /> Скачать PPTX
+                  </a>
+                  {d.magnet && (
+                    <a href={`${BASE}leadmagnets/${d.magnet.file}.pdf`} download className="inline-flex items-center gap-2 rounded-xl border border-line-strong px-5 py-3 font-semibold text-ink transition-colors hover:border-accent hover:text-accent">
+                      <IconDoc size={18} /> {d.magnet.title}
+                    </a>
+                  )}
+                  {d.quiz && (
+                    <Link to={d.quiz.to} className="inline-flex items-center gap-2 rounded-xl border border-line-strong px-5 py-3 font-semibold text-ink transition-colors hover:border-accent hover:text-accent">
+                      <IconTarget size={18} /> {d.quiz.title}
+                    </Link>
+                  )}
+                </div>
               </div>
-              <figcaption className="mt-2 text-[0.82rem] text-ink-mute">Титульный слайд</figcaption>
-            </figure>
-          </div>
 
-          {/* галерея слайдов */}
-          <div className="mt-8 border-t border-line pt-6">
-            <div className="mb-3 text-[0.85rem] font-medium text-ink-mute">Слайды из презентации — нажмите, чтобы увеличить</div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {agroDeck.gallery.map((g) => (
-                <button key={g} onClick={() => setLightbox(g)} className="overflow-hidden rounded-2xl border border-line bg-bg transition-transform hover:-translate-y-1 hover:border-accent">
-                  <img src={`${BASE}previews/${g}.png`} alt="Слайд презентации" loading="lazy" className="block aspect-[16/9] w-full object-contain" />
-                </button>
-              ))}
+              {/* превью — фиксированные пропорции, без растяжения */}
+              <figure className="m-0">
+                <div className="overflow-hidden rounded-2xl border border-line bg-bg">
+                  <img src={`${BASE}previews/${d.id}.png`} alt={`Титульный слайд презентации «${d.title}»`}
+                    className="block aspect-[16/9] w-full object-contain" />
+                </div>
+                <figcaption className="mt-2 text-[0.82rem] text-ink-mute">Титульный слайд</figcaption>
+              </figure>
+            </div>
+
+            {/* галерея слайдов */}
+            <div className="mt-8 border-t border-line pt-6">
+              <div className="mb-3 text-[0.85rem] font-medium text-ink-mute">Слайды из презентации — нажмите, чтобы увеличить</div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {d.gallery.map((g) => (
+                  <button key={g} onClick={() => setLightbox(g)} className="overflow-hidden rounded-2xl border border-line bg-bg transition-transform hover:-translate-y-1 hover:border-accent">
+                    <img src={`${BASE}previews/${g}.png`} alt="Слайд презентации" loading="lazy" className="block aspect-[16/9] w-full object-contain" />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ))}
 
       {/* MAGNETS */}
       <section id="magnets" className="mx-auto max-w-[1200px] px-6 py-16">
