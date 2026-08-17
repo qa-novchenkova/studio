@@ -49,6 +49,24 @@ export const caseDetails: CaseDetail[] = [
     ],
     gallery: ['horeca-s03', 'horeca-s04', 'horeca-s05', 'horeca-s08'],
     magnet: { file: 'horeca-menu-audit', title: 'Чек-лист аудита меню' },
+    quiz: { to: '/calc-horeca', title: 'Калькулятор выручки' },
+  },
+  {
+    id: 'petfood',
+    topic: 'Корма для животных',
+    title: 'Миска, к которой возвращаются',
+    tagline: 'Как превратить разовую покупку корма в постоянного покупателя',
+    slides: 9,
+    audience: 'Бренды кормов и зоомагазины',
+    bullets: [
+      'Экономика повторной покупки: деньги живут не в первой, а в пятой',
+      'Разные мотивы первой и второй покупки — и что на них влияет',
+      'Состав понятным языком вместо таблицы мелким шрифтом',
+      'Путь от разовой покупки к регулярному заказу',
+      'Форматы контента, которые доводят до второй покупки',
+    ],
+    gallery: ['petfood-s03', 'petfood-s05', 'petfood-s06', 'petfood-s07'],
+    magnet: { file: 'petfood-guide', title: 'Гид по выбору корма' },
   },
 ]
 
@@ -75,7 +93,7 @@ export const cases: CaseItem[] = [
   { id: 'horeca', topic: 'Кафе и рестораны', title: 'Меню, которое продаёт', desc: 'Средний чек и загрузка будней — через инженерию меню, а не скидки.', ready: true },
   { id: 'auto', topic: 'Автосервис', title: 'Запись без хаоса', desc: 'Как сервису собирать заявки со всех каналов и не терять клиентов.', ready: false },
   { id: 'tech', topic: 'Электроника', title: 'Карточка, которая продаёт', desc: 'Контент для магазина техники: описания, сравнения, подборки.', ready: false },
-  { id: 'petfood', topic: 'Корма для животных', title: 'Здоровье в миске', desc: 'Экспертный контент о питании питомцев и повторные продажи.', ready: false },
+  { id: 'petfood', topic: 'Корма для животных', title: 'Миска, к которой возвращаются', desc: 'Как превратить разовую покупку корма в постоянного покупателя.', ready: true },
   { id: 'realty', topic: 'Недвижимость', title: 'Ключи быстрее', desc: 'Упаковка объекта: лендинг, презентация, показ.', ready: false },
 ]
 
@@ -84,6 +102,7 @@ export type Magnet = { id: string; topic: string; title: string; format: string;
 export const magnets: Magnet[] = [
   { id: 'agro-checklist', topic: 'Агро', title: 'Осмотр поля перед обработкой', format: 'PDF · чек-лист', desc: '11 пунктов, которые агроном проверяет до выезда техники. Готов к печати на A4.', ready: true },
   { id: 'horeca-menu-audit', topic: 'Кафе и рестораны', title: 'Аудит меню за 20 минут', format: 'PDF · чек-лист', desc: '12 пунктов: структура, описания, цены и поводы. Проходится с меню в руках.', ready: true },
+  { id: 'petfood-guide', topic: 'Корма для животных', title: 'Как выбрать корм питомцу', format: 'PDF · гид', desc: '11 вопросов до покупки: питомец, состав, покупка и переход на новый корм.', ready: true },
   { id: 'agro-calendar', topic: 'Агро', title: 'Календарь фаз и обработок на сезон', format: 'PDF · шаблон', desc: 'Готовая сетка: фаза — задача — препарат — срок.', ready: false },
 ]
 
@@ -93,15 +112,39 @@ export const interactives: Interactive[] = [
   { title: 'Где поле теряет урожай', desc: 'Тест для агронома: 6 вопросов — и понятно, какой фактор забирает центнеры.', to: '/quiz-agro', tag: 'Тест', ready: true },
   { title: 'Виральный тест', desc: '«Кто ты в хаосе рабочего дня» — 4 архетипа и шаринг в соцсети.', href: 'https://qa-novchenkova.github.io/puls/#/quiz', tag: 'Тест', ready: true },
   { title: 'Мини-игра', desc: '«Успей обработать лиды» — аркада на реакцию с рекордом.', href: 'https://qa-novchenkova.github.io/puls/#/game', tag: 'Игра', ready: true },
-  { title: 'Сколько приносит работа с меню', desc: 'Калькулятор для ресторатора: ползунки по гостям и чеку — и видно прибавку за месяц и год.', to: '/calc-horeca', tag: 'Калькулятор', ready: true },
+  { title: 'Сколько приносит работа с меню', desc: 'Калькулятор для ресторатора: подставьте свои цифры и увидите прибавку за месяц и за год.', to: '/calc-horeca', tag: 'Калькулятор', ready: true },
 ]
 
 // Баннеры (файлы в public/banners)
-export type Banner = { id: string; topic: string; title: string; size: string; ratio: string }
+export type Banner = { id: string; topic: string; title: string; ratio: string }
+export type BannerGroup = { format: string; size: string; cols: string; items: Banner[] }
 
-export const banners: Banner[] = [
-  { id: 'agro-post-1080', topic: 'Агро', title: 'Чек-лист осмотра поля', size: '1080×1080 · пост', ratio: '1/1' },
-  { id: 'agro-web-1200x628', topic: 'Агро', title: 'Поле недобирает?', size: '1200×628 · веб-баннер', ratio: '1200/628' },
-  { id: 'horeca-post-1080', topic: 'Кафе и рестораны', title: 'Аудит меню за 20 минут', size: '1080×1080 · пост', ratio: '1/1' },
-  { id: 'horeca-story-1080x1920', topic: 'Кафе и рестораны', title: 'Будни пустые?', size: '1080×1920 · сторис', ratio: '9/16' },
+// сгруппированы по формату: внутри группы карточки одного размера
+export const bannerGroups: BannerGroup[] = [
+  {
+    format: 'Посты для соцсетей',
+    size: '1080×1080',
+    cols: 'sm:grid-cols-2 lg:grid-cols-4',
+    items: [
+      { id: 'agro-post-1080', topic: 'Агро', title: 'Чек-лист осмотра поля', ratio: '1/1' },
+      { id: 'horeca-post-1080', topic: 'Кафе и рестораны', title: 'Аудит меню за 20 минут', ratio: '1/1' },
+      { id: 'petfood-post-1080', topic: 'Корма для животных', title: 'Как выбрать корм питомцу', ratio: '1/1' },
+    ],
+  },
+  {
+    format: 'Веб-баннеры',
+    size: '1200×628',
+    cols: 'sm:grid-cols-2',
+    items: [
+      { id: 'agro-web-1200x628', topic: 'Агро', title: 'Поле недобирает?', ratio: '1200/628' },
+    ],
+  },
+  {
+    format: 'Сторис',
+    size: '1080×1920',
+    cols: 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4',
+    items: [
+      { id: 'horeca-story-1080x1920', topic: 'Кафе и рестораны', title: 'Будни пустые?', ratio: '9/16' },
+    ],
+  },
 ]

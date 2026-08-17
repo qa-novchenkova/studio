@@ -1,7 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from './lib/useTheme'
-import { BASE, caseDetails, directions, cases, magnets, interactives, banners } from './data'
+import { BASE, caseDetails, directions, cases, magnets, interactives, bannerGroups } from './data'
 import AgroScene from './components/AgroScene'
 import {
   IconLeaf, IconWheat, IconChart, IconDoc, IconDownload, IconSpark, IconPlay,
@@ -387,23 +387,32 @@ export default function App() {
       <section id="banners" className="mx-auto max-w-[1200px] px-6 py-16">
         <SectionHead index="04" kicker="Баннеры" title="Графика под площадки"
           sub="Посты, веб-баннеры и сторис — в размерах, готовых к публикации. Нажмите, чтобы увеличить." />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {banners.map((b) => (
-            <article key={b.id} className="flex flex-col overflow-hidden rounded-[18px] border border-line bg-surface">
-              <button onClick={() => setLightbox(`${BASE}banners/${b.id}.png`)} className="block overflow-hidden bg-bg transition-transform hover:-translate-y-0.5">
-                <img src={`${BASE}banners/${b.id}.png`} alt={`Баннер: ${b.title}`} loading="lazy"
-                  className="block w-full object-cover" style={{ aspectRatio: b.ratio }} />
-              </button>
-              <div className="flex flex-1 flex-col p-4">
-                <div className="text-[0.68rem] font-medium uppercase tracking-[0.1em] text-ink-mute">{b.size}</div>
-                <h3 className="mt-1 font-display text-[1.05rem] font-bold leading-tight">{b.title}</h3>
-                <p className="mt-0.5 flex-1 text-[0.85rem] text-ink-soft">{b.topic}</p>
-                <a href={`${BASE}banners/${b.id}.png`} download
-                  className="mt-3 inline-flex w-max items-center gap-1.5 rounded-xl border border-line-strong px-3.5 py-2 text-[0.85rem] font-semibold text-ink transition-colors hover:border-accent hover:text-accent">
-                  <IconDownload size={15} /> PNG
-                </a>
+        <div className="mt-10 flex flex-col gap-10">
+          {bannerGroups.map((g) => (
+            <div key={g.format}>
+              <div className="mb-4 flex items-baseline gap-3 border-b border-line pb-2">
+                <h3 className="font-display text-[1.15rem] font-bold">{g.format}</h3>
+                <span className="font-mono text-[0.78rem] text-ink-mute">{g.size}</span>
               </div>
-            </article>
+              <div className={`grid gap-5 ${g.cols}`}>
+                {g.items.map((b) => (
+                  <article key={b.id} className="flex flex-col overflow-hidden rounded-[18px] border border-line bg-surface">
+                    <button onClick={() => setLightbox(`${BASE}banners/${b.id}.png`)} className="block overflow-hidden bg-bg transition-transform hover:-translate-y-0.5">
+                      <img src={`${BASE}banners/${b.id}.png`} alt={`Баннер: ${b.title}`} loading="lazy"
+                        className="block w-full object-cover" style={{ aspectRatio: b.ratio }} />
+                    </button>
+                    <div className="flex flex-1 flex-col p-4">
+                      <h4 className="font-display text-[1.02rem] font-bold leading-tight">{b.title}</h4>
+                      <p className="mt-0.5 flex-1 text-[0.85rem] text-ink-soft">{b.topic}</p>
+                      <a href={`${BASE}banners/${b.id}.png`} download
+                        className="mt-3 inline-flex w-max items-center gap-1.5 rounded-xl border border-line-strong px-3.5 py-2 text-[0.85rem] font-semibold text-ink transition-colors hover:border-accent hover:text-accent">
+                        <IconDownload size={15} /> PNG
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </section>
