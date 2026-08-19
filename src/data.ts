@@ -9,6 +9,7 @@ export type CaseDetail = {
   audience: string
   bullets: string[]
   gallery: string[]
+  icons: string[]
   magnet?: { file: string; title: string }
   quiz?: { to: string; title: string }
 }
@@ -30,13 +31,14 @@ export const caseDetails: CaseDetail[] = [
       'Зонирование поля и экономика прибавки',
     ],
     gallery: ['agro-s03', 'agro-s04', 'agro-s05', 'agro-s08'],
+    icons: ['chart','target','wheat','drop','leaf'],
     magnet: { file: 'agro-checklist', title: 'Чек-лист осмотра поля' },
     quiz: { to: '/quiz-agro', title: 'Тест «Где поле теряет урожай»' },
   },
   {
     id: 'horeca',
     topic: 'Кафе и рестораны',
-    title: 'Меню, которое продаёт',
+    title: 'Гость выбирает глазами',
     tagline: 'Как поднять средний чек и заполнить будни, не трогая цены в прайсе',
     slides: 10,
     audience: 'Владельцы и управляющие заведений',
@@ -48,6 +50,7 @@ export const caseDetails: CaseDetail[] = [
       'Экономика возврата гостя и рост среднего чека',
     ],
     gallery: ['horeca-s03', 'horeca-s04', 'horeca-s05', 'horeca-s08'],
+    icons: ['clock','compare','plate','calendar','repeat'],
     magnet: { file: 'horeca-menu-audit', title: 'Чек-лист аудита меню' },
     quiz: { to: '/calc-horeca', title: 'Калькулятор выручки' },
   },
@@ -66,6 +69,7 @@ export const caseDetails: CaseDetail[] = [
       'Форматы контента, которые доводят до второй покупки',
     ],
     gallery: ['petfood-s03', 'petfood-s05', 'petfood-s06', 'petfood-s07'],
+    icons: ['repeat','heart','bowl','paw','chat'],
     magnet: { file: 'petfood-guide', title: 'Гид по выбору корма' },
     quiz: { to: '/game-petfood', title: 'Мини-игра «Собери миску»' },
   },
@@ -84,6 +88,7 @@ export const caseDetails: CaseDetail[] = [
       'Четыре инструмента, которые убирают хаос в записи',
     ],
     gallery: ['auto-s03', 'auto-s04', 'auto-s05', 'auto-s07'],
+    icons: ['clock','funnel','route','wrench','car'],
     magnet: { file: 'auto-audit', title: 'Чек-лист аудита записи' },
     quiz: { to: '/game-auto', title: 'Мини-игра «Успей принять машину»' },
   },
@@ -102,6 +107,7 @@ export const caseDetails: CaseDetail[] = [
       'Комплект материалов на объект: планировка, карточка, лендинг, сценарий показа',
     ],
     gallery: ['realty-s03', 'realty-s04', 'realty-s05', 'realty-s06'],
+    icons: ['clock','plan','route','chat','folder'],
     magnet: { file: 'realty-checklist', title: 'Чек-лист упаковки объекта' },
     quiz: { to: '/game-realty', title: 'Мини-игра «Подбери объект»' },
   },
@@ -120,6 +126,7 @@ export const caseDetails: CaseDetail[] = [
       'Конверсия карточки и снижение возвратов',
     ],
     gallery: ['tech-s03', 'tech-s04', 'tech-s05', 'tech-s06'],
+    icons: ['device','compare','cart','chat','chart'],
     magnet: { file: 'tech-checklist', title: 'Чек-лист карточки товара' },
   },
 ]
@@ -144,7 +151,7 @@ export type CaseItem = { id: string; topic: string; title: string; desc: string;
 
 export const cases: CaseItem[] = [
   { id: 'agro', topic: 'Сельское хозяйство', title: 'Поле недобирает', desc: 'Питч-дек для агронома: где теряются центнеры и как их вернуть.', ready: true },
-  { id: 'horeca', topic: 'Кафе и рестораны', title: 'Меню, которое продаёт', desc: 'Средний чек и загрузка будней — через инженерию меню, а не скидки.', ready: true },
+  { id: 'horeca', topic: 'Кафе и рестораны', title: 'Гость выбирает глазами', desc: 'Средний чек и загрузка будней — через инженерию меню, а не скидки.', ready: true },
   { id: 'auto', topic: 'Автосервис', title: 'Запись без хаоса', desc: 'Как отвечать за 15 минут и не терять машины между каналами.', ready: true },
   { id: 'tech', topic: 'Электроника', title: 'Карточка, которая продаёт', desc: 'Как объяснить характеристики так, чтобы покупатель закрыл остальные вкладки.', ready: true },
   { id: 'petfood', topic: 'Корма для животных', title: 'Миска, к которой возвращаются', desc: 'Как превратить разовую покупку корма в постоянного покупателя.', ready: true },
@@ -160,19 +167,18 @@ export const magnets: Magnet[] = [
   { id: 'auto-audit', topic: 'Автосервис', title: 'Аудит записи за 15 минут', format: 'PDF · чек-лист', desc: '11 пунктов: приём обращений, скорость, загрузка и возврат клиентов.', ready: true },
   { id: 'realty-checklist', topic: 'Недвижимость', title: 'Упаковка объекта перед продажей', format: 'PDF · чек-лист', desc: '11 пунктов: материалы объекта, объявление, показ и работа после него.', ready: true },
   { id: 'tech-checklist', topic: 'Электроника', title: 'Карточка, которая отвечает на вопросы', format: 'PDF · чек-лист', desc: '11 пунктов: первый экран, фото, описание и доверие покупателя.', ready: true },
-  { id: 'agro-calendar', topic: 'Агро', title: 'Календарь фаз и обработок на сезон', format: 'PDF · шаблон', desc: 'Готовая сетка: фаза — задача — препарат — срок.', ready: false },
 ]
 
-export type Interactive = { title: string; desc: string; href?: string; to?: string; tag: string; ready: boolean }
+export type Interactive = { title: string; desc: string; href?: string; to?: string; tag: string; ready: boolean; art?: 'quiz' | 'calc' | 'petgame' | 'autogame' | 'realtygame' | 'pulsequiz' | 'pulsegame' }
 
 export const interactives: Interactive[] = [
-  { title: 'Где поле теряет урожай', desc: 'Тест для агронома: 6 вопросов — и понятно, какой фактор забирает центнеры.', to: '/quiz-agro', tag: 'Тест', ready: true },
-  { title: 'Виральный тест', desc: '«Кто ты в хаосе рабочего дня» — 4 архетипа и шаринг в соцсети.', href: 'https://qa-novchenkova.github.io/puls/#/quiz', tag: 'Тест', ready: true },
-  { title: 'Мини-игра', desc: '«Успей обработать лиды» — аркада на реакцию с рекордом.', href: 'https://qa-novchenkova.github.io/puls/#/game', tag: 'Игра', ready: true },
-  { title: 'Собери правильную миску', desc: 'Мини-игра для зоо-бренда: ловим полезные ингредиенты, пропускаем пустые калории.', to: '/game-petfood', tag: 'Игра', ready: true },
-  { title: 'Подбери объект под запрос', desc: 'Мини-игра для риелтора: клиент называет требование — за 9 секунд выбираем подходящий объект.', to: '/game-realty', tag: 'Игра', ready: true },
-  { title: 'Успей принять машину', desc: 'Мини-игра для автосервиса: ставим приёмку на полосу и не упускаем клиентов.', to: '/game-auto', tag: 'Игра', ready: true },
-  { title: 'Сколько приносит работа с меню', desc: 'Калькулятор для ресторатора: подставьте свои цифры и увидите прибавку за месяц и за год.', to: '/calc-horeca', tag: 'Калькулятор', ready: true },
+  { title: 'Где поле теряет урожай', desc: 'Тест для агронома: 6 вопросов — и понятно, какой фактор забирает центнеры.', to: '/quiz-agro', tag: 'Тест', ready: true, art: 'quiz' },
+  { title: 'Виральный тест', desc: '«Кто ты в хаосе рабочего дня» — 4 архетипа и шаринг в соцсети.', href: 'https://qa-novchenkova.github.io/puls/#/quiz', tag: 'Тест', ready: true, art: 'pulsequiz' },
+  { title: 'Мини-игра', desc: '«Успей обработать лиды» — аркада на реакцию с рекордом.', href: 'https://qa-novchenkova.github.io/puls/#/game', tag: 'Игра', ready: true, art: 'pulsegame' },
+  { title: 'Собери правильную миску', desc: 'Мини-игра для зоо-бренда: ловим полезные ингредиенты, пропускаем пустые калории.', to: '/game-petfood', tag: 'Игра', ready: true, art: 'petgame' },
+  { title: 'Подбери объект под запрос', desc: 'Мини-игра для риелтора: клиент называет требование — за 9 секунд выбираем подходящий объект.', to: '/game-realty', tag: 'Игра', ready: true, art: 'realtygame' },
+  { title: 'Успей принять машину', desc: 'Мини-игра для автосервиса: ставим приёмку на полосу и не упускаем клиентов.', to: '/game-auto', tag: 'Игра', ready: true, art: 'autogame' },
+  { title: 'Сколько приносит работа с меню', desc: 'Калькулятор для ресторатора: подставьте свои цифры и увидите прибавку за месяц и за год.', to: '/calc-horeca', tag: 'Калькулятор', ready: true, art: 'calc' },
 ]
 
 // Баннеры (файлы в public/banners)

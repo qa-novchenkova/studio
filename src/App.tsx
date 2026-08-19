@@ -6,7 +6,11 @@ import AgroScene from './components/AgroScene'
 import {
   IconLeaf, IconWheat, IconChart, IconDoc, IconDownload, IconSpark, IconPlay,
   IconMail, IconTarget, IconDrop, IconLayout, IconImage, IconPen, IconMotion,
+  IconPlate, IconStar, IconRepeat, IconCalendar, IconPaw, IconBowl, IconHeart,
+  IconBox, IconChat, IconCar, IconWrench, IconClock, IconFunnel, IconHome,
+  IconPlan, IconRoute, IconFolder, IconDevice, IconCompare, IconCart,
 } from './components/Icons'
+import { PLAY_ART } from './components/PlayArt'
 
 // Чтобы форма писала на почту — вставь endpoint Formspree (formspree.io → новая форма).
 const FORMSPREE_ENDPOINT = ''
@@ -25,6 +29,16 @@ const NAV = [
 const ICONS = {
   doc: IconDoc, download: IconDownload, motion: IconMotion, target: IconTarget,
   play: IconPlay, layout: IconLayout, image: IconImage, chart: IconChart, pen: IconPen,
+}
+
+// иконки пунктов кейса — свои для каждой ниши
+const CASE_ICONS: Record<string, (p: { size?: number }) => React.ReactElement> = {
+  chart: IconChart, target: IconTarget, wheat: IconWheat, drop: IconDrop, leaf: IconLeaf,
+  plate: IconPlate, star: IconStar, repeat: IconRepeat, calendar: IconCalendar,
+  paw: IconPaw, bowl: IconBowl, heart: IconHeart, box: IconBox, chat: IconChat,
+  car: IconCar, wrench: IconWrench, clock: IconClock, funnel: IconFunnel,
+  home: IconHome, plan: IconPlan, route: IconRoute, folder: IconFolder,
+  device: IconDevice, compare: IconCompare, cart: IconCart,
 }
 
 function Nav() {
@@ -138,8 +152,10 @@ export default function App() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [err, setErr] = useState<{ name?: string; email?: string; message?: string }>({})
   const track = useRef<HTMLDivElement>(null)
+  const magTrack = useRef<HTMLDivElement>(null)
 
   const slide = (dir: 1 | -1) => track.current?.scrollBy({ left: dir * 340, behavior: 'smooth' })
+  const slideMag = (dir: 1 | -1) => magTrack.current?.scrollBy({ left: dir * 380, behavior: 'smooth' })
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -273,7 +289,7 @@ export default function App() {
                   {d.bullets.map((b, i) => (
                     <li key={b} className="flex gap-3 text-[0.95rem]">
                       <span className="mt-0.5 shrink-0 text-accent">
-                        {[<IconChart key="a" size={18} />, <IconTarget key="b" size={18} />, <IconWheat key="c" size={18} />, <IconDrop key="d" size={18} />, <IconLeaf key="e" size={18} />][i]}
+                        {(() => { const Ic = CASE_ICONS[d.icons[i]] || IconSpark; return <Ic size={18} /> })()}
                       </span>
                       {b}
                     </li>
@@ -324,10 +340,16 @@ export default function App() {
       {/* MAGNETS */}
       <section id="magnets" className="mx-auto max-w-[1200px] px-6 py-16">
         <SectionHead index="02" kicker="Материалы" title="Что скачивают и применяют"
-          sub="Чек-листы, гайды и шаблоны под конкретную отрасль — точка входа в диалог с клиентом." />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          sub="Чек-листы, гайды и шаблоны под конкретную отрасль — точка входа в диалог с клиентом."
+          aside={
+            <div className="hidden shrink-0 gap-2 md:flex">
+              <button onClick={() => slideMag(-1)} aria-label="Назад" className="grid h-11 w-11 place-items-center rounded-xl border border-line-strong text-ink-soft transition-colors hover:border-accent hover:text-accent">‹</button>
+              <button onClick={() => slideMag(1)} aria-label="Вперёд" className="grid h-11 w-11 place-items-center rounded-xl border border-line-strong text-ink-soft transition-colors hover:border-accent hover:text-accent">›</button>
+            </div>
+          } />
+        <div ref={magTrack} className="no-sb mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2">
           {magnets.map((m) => (
-            <article key={m.id} className="flex flex-col rounded-[18px] border border-line bg-surface p-6">
+            <article key={m.id} className="flex w-[86vw] shrink-0 snap-start flex-col rounded-[18px] border border-line bg-surface p-6 sm:w-[46%] lg:w-[calc((100%-2.5rem)/3)]">
               {m.ready ? (
                 <button onClick={() => setLightbox(`${BASE}previews/magnet-${m.id}.png`)} className="mb-4 overflow-hidden rounded-xl border border-line bg-bg transition-transform hover:-translate-y-0.5 hover:border-accent">
                   <img src={`${BASE}previews/magnet-${m.id}.png`} alt={`Превью: ${m.title}`} loading="lazy" className="block aspect-[3/4] w-full object-cover object-top" />
@@ -353,8 +375,14 @@ export default function App() {
         <SectionHead index="03" kicker="Интерактив" title="Форматы, в которые играют" sub="Тесты, игры и калькуляторы вовлекают сильнее баннера и приводят к заявкам." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {interactives.map((it) => {
+            const Art = it.art ? PLAY_ART[it.art] : null
             const inner = (
               <>
+                {Art && (
+                  <div className="mb-4 overflow-hidden rounded-2xl border border-line">
+                    <Art />
+                  </div>
+                )}
                 <div className="flex items-center gap-3">
                   <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent-soft text-accent">{it.tag === 'Игра' ? <IconPlay size={20} /> : it.tag === 'Калькулятор' ? <IconChart size={20} /> : <IconTarget size={20} />}</span>
                   <span className="rounded-full border border-line px-3 py-1 text-[0.75rem] text-ink-soft">{it.tag}</span>
