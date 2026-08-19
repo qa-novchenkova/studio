@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme } from './lib/useTheme'
 import { BASE, caseDetails, directions, cases, magnets, interactives, bannerGroups } from './data'
@@ -147,12 +147,20 @@ function Directions() {
 
 export default function App() {
   const [lightbox, setLightbox] = useState<string | null>(null)
+  const [showTop, setShowTop] = useState(false)
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [err, setErr] = useState<{ name?: string; email?: string; message?: string }>({})
   const track = useRef<HTMLDivElement>(null)
   const magTrack = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 700)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const slide = (dir: 1 | -1) => track.current?.scrollBy({ left: dir * 340, behavior: 'smooth' })
   const slideMag = (dir: 1 | -1) => magTrack.current?.scrollBy({ left: dir * 380, behavior: 'smooth' })
@@ -372,7 +380,7 @@ export default function App() {
 
       {/* INTERACTIVE */}
       <section id="play" className="mx-auto max-w-[1200px] px-6 py-16">
-        <SectionHead index="03" kicker="Интерактив" title="Попробуйте прямо здесь" sub="Тесты, игры и калькуляторы вовлекают сильнее баннера и приводят к заявкам." />
+        <SectionHead index="03" kicker="Интерактив" title="Интерактив вместо баннера" sub="Тесты, игры и калькуляторы вовлекают сильнее баннера и приводят к заявкам." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {interactives.map((it) => {
             const Art = it.art ? PLAY_ART[it.art] : null
@@ -505,6 +513,17 @@ export default function App() {
           <span className="rounded-full border border-line px-3 py-1 font-mono text-[0.72rem]">vibe-coded · React + Vite + Tailwind</span>
         </div>
       </footer>
+
+      {/* кнопка «наверх» */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Наверх"
+        className={`fixed bottom-7 right-7 z-[80] grid h-12 w-12 place-items-center rounded-full border border-line-strong bg-surface text-ink-soft shadow-lg transition-all hover:border-accent hover:text-accent ${
+          showTop ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+        }`}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 19V6M6 12l6-6 6 6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+      </button>
 
       <div role="status" className={`fixed bottom-7 left-1/2 z-[90] -translate-x-1/2 rounded-xl bg-accent px-6 py-3.5 font-semibold text-white shadow-lg transition-all ${sent ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'}`}>
         Заявка отправлена — спасибо!

@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect width="64" height="64" rx="15" fill="#152420"/>
-  <!-- лист-мотив студии -->
-  <path d="M46 15C28 15 18 24 18 36v13" stroke="#5FB47B" stroke-width="4" stroke-linecap="round" fill="none"/>
-  <path d="M46 15c0 16-9 23-19 23h-5c0-12 10-20 24-23z" fill="#5FB47B"/>
-  <circle cx="46" cy="46" r="5" fill="#E0B25C"/>
-</svg>
