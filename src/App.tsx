@@ -372,7 +372,7 @@ export default function App() {
 
       {/* INTERACTIVE */}
       <section id="play" className="mx-auto max-w-[1200px] px-6 py-16">
-        <SectionHead index="03" kicker="Интерактив" title="Форматы, в которые играют" sub="Тесты, игры и калькуляторы вовлекают сильнее баннера и приводят к заявкам." />
+        <SectionHead index="03" kicker="Интерактив" title="Попробуйте прямо здесь" sub="Тесты, игры и калькуляторы вовлекают сильнее баннера и приводят к заявкам." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {interactives.map((it) => {
             const Art = it.art ? PLAY_ART[it.art] : null
